@@ -1,0 +1,3394 @@
+{
+	"info": {
+		"_postman_id": "87873ef7-a89c-4bfc-b695-c1575db2b8db",
+		"name": "Registration form (Optimax Dev)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27815156"
+	},
+	"item": [
+		{
+			"name": "Positive tests",
+			"item": [
+				{
+					"name": "Valid data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Responce contains TOKEN fields\", function () {",
+									"    const {token} = pm.response.json();",
+									"",
+									"    pm.expect(token.token_type).to.be.a('string');",
+									"    pm.expect(token.expires_in).to.be.an('number');",
+									"    pm.expect(token.expires_in % 1).to.equal(0);",
+									"    pm.expect(token.access_token).to.be.a('string');",
+									"    pm.expect(token.refresh_token).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - EMAIL fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    pm.expect(customer.email).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - FIRSTNAME (and LENGTH) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.firstname;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.an('string');",
+									"",
+									"    let minLength = 2; //не уверена в необходимости этой проверки))",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - LASTTNAME (and LENGTH) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.lastname;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.an('string');",
+									"",
+									"    let minLength = 2;  //не уверена в необходимости этой проверки))",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - GROUP - TITLE (LENGHT and TYPE) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.group.title;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.a('string');",
+									"",
+									"    let minLength = 2; ",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - UVP - PLANID (TYPE) fields\", function () {",
+									"    const {customer:{uvp}} = pm.response.json();",
+									"",
+									"    if (typeof uvp.planId == 'number'){ ",
+									"        pm.expect(uvp.planId % 1).to.equal(0);",
+									"    } else {",
+									"        pm.expect(uvp.planId).to.be.null;",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - UVP - COMPANY - TITLE (TYPE) fields\", function () {",
+									"    const {customer:{uvp}} = pm.response.json();",
+									"",
+									"    pm.expect(uvp.company.title).to.be.a('string');",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authority",
+								"value": "uvp-0000-uhc-desktop.gusadev.com"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+							},
+							{
+								"key": "cache-control",
+								"value": "no-cache"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "cookie",
+								"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+							},
+							{
+								"key": "origin",
+								"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+							},
+							{
+								"key": "pragma",
+								"value": "no-cache"
+							},
+							{
+								"key": "referer",
+								"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "store",
+								"value": "17"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "website",
+								"value": "4"
+							},
+							{
+								"key": "x-visitor-id",
+								"value": "WYQXisYBnQ6boUzmzo1zA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"websiteId\": {{$randomInt}},\n    \"email\": \"{{$randomEmail}}\",\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_TEST}}ms/customer/registration",
+							"host": [
+								"{{URL_TEST}}ms"
+							],
+							"path": [
+								"customer",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mixed keys in JSON",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Responce contains TOKEN fields\", function () {",
+									"    const {token} = pm.response.json();",
+									"",
+									"    pm.expect(token.token_type).to.be.a('string');",
+									"    pm.expect(token.expires_in).to.be.an('number');",
+									"    pm.expect(token.expires_in % 1).to.equal(0);",
+									"    pm.expect(token.access_token).to.be.a('string');",
+									"    pm.expect(token.refresh_token).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - EMAIL fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    pm.expect(customer.email).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - FIRSTNAME (and LENGTH) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.firstname;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.an('string');",
+									"",
+									"    let minLength = 2; //не уверена в необходимости этой проверки))",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - LASTTNAME (and LENGTH) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.lastname;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.an('string');",
+									"",
+									"    let minLength = 2;  //не уверена в необходимости этой проверки))",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - GROUP - TITLE (LENGHT and TYPE) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.group.title;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.a('string');",
+									"",
+									"    let minLength = 2; ",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - UVP - PLANID (TYPE) fields\", function () {",
+									"    const {customer:{uvp}} = pm.response.json();",
+									"",
+									"    if (typeof uvp.planId == 'number'){ ",
+									"        pm.expect(uvp.planId % 1).to.equal(0);",
+									"    } else {",
+									"        pm.expect(uvp.planId).to.be.null;",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - UVP - COMPANY - TITLE (TYPE) fields\", function () {",
+									"    const {customer:{uvp}} = pm.response.json();",
+									"",
+									"    pm.expect(uvp.company.title).to.be.a('string');",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authority",
+								"value": "uvp-0000-uhc-desktop.gusadev.com"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+							},
+							{
+								"key": "cache-control",
+								"value": "no-cache"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "cookie",
+								"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+							},
+							{
+								"key": "origin",
+								"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+							},
+							{
+								"key": "pragma",
+								"value": "no-cache"
+							},
+							{
+								"key": "referer",
+								"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "store",
+								"value": "17"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "website",
+								"value": "4"
+							},
+							{
+								"key": "x-visitor-id",
+								"value": "WYQXisYBnQ6boUzmzo1zA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"{{$randomPassword}}\",\n    \"registrationMethod\": \"default\",\n    \"websiteId\": {{$randomInt}},\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_TEST}}ms/customer/registration",
+							"host": [
+								"{{URL_TEST}}ms"
+							],
+							"path": [
+								"customer",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Valid data with CLIENT ID copied from site",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Responce contains TOKEN fields\", function () {",
+									"    const {token} = pm.response.json();",
+									"",
+									"    pm.expect(token.token_type).to.be.a('string');",
+									"    pm.expect(token.expires_in).to.be.an('number');",
+									"    pm.expect(token.expires_in % 1).to.equal(0);",
+									"    pm.expect(token.access_token).to.be.a('string');",
+									"    pm.expect(token.refresh_token).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - EMAIL fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    pm.expect(customer.email).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - FIRSTNAME (and LENGTH) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.firstname;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.an('string');",
+									"",
+									"    let minLength = 2; //не уверена в необходимости этой проверки))",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - LASTTNAME (and LENGTH) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.lastname;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.an('string');",
+									"",
+									"    let minLength = 2;  //не уверена в необходимости этой проверки))",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - GROUP - TITLE (LENGHT and TYPE) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.group.title;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.a('string');",
+									"",
+									"    let minLength = 2; ",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - UVP - PLANID (TYPE) fields\", function () {",
+									"    const {customer:{uvp}} = pm.response.json();",
+									"",
+									"    if (typeof uvp.planId == 'number'){ ",
+									"        pm.expect(uvp.planId % 1).to.equal(0);",
+									"    } else {",
+									"        pm.expect(uvp.planId).to.be.null;",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - UVP - COMPANY - TITLE (TYPE) fields\", function () {",
+									"    const {customer:{uvp}} = pm.response.json();",
+									"",
+									"    pm.expect(uvp.company.title).to.be.a('string');",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authority",
+								"value": "uvp-0000-uhc-desktop.gusadev.com"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+							},
+							{
+								"key": "cache-control",
+								"value": "no-cache"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "cookie",
+								"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698248181.5.1.1698248458.0.0.0"
+							},
+							{
+								"key": "origin",
+								"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+							},
+							{
+								"key": "pragma",
+								"value": "no-cache"
+							},
+							{
+								"key": "referer",
+								"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"macOS\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "store",
+								"value": "17"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "website",
+								"value": "4"
+							},
+							{
+								"key": "x-visitor-id",
+								"value": "WYQXisYBnQ6boUzmzo1zA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"{{$randomPassword}}\",\n    \"registrationMethod\": \"default\",\n    \"websiteId\": {{$randomInt}},\n    \"clientId\": \"{{clientId_temporary}}\"\n}"
+						},
+						"url": {
+							"raw": "https://uvp-0000-uhc-desktop.gusadev.com/ms/customer/registration",
+							"protocol": "https",
+							"host": [
+								"uvp-0000-uhc-desktop",
+								"gusadev",
+								"com"
+							],
+							"path": [
+								"ms",
+								"customer",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "default",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Responce contains TOKEN fields\", function () {",
+									"    const {token} = pm.response.json();",
+									"",
+									"    pm.expect(token.token_type).to.be.a('string');",
+									"    pm.expect(token.expires_in).to.be.an('number');",
+									"    pm.expect(token.expires_in % 1).to.equal(0);",
+									"    pm.expect(token.access_token).to.be.a('string');",
+									"    pm.expect(token.refresh_token).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - EMAIL fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    pm.expect(customer.email).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - FIRSTNAME (and LENGTH) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.firstname;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.an('string');",
+									"",
+									"    let minLength = 2; //не уверена в необходимости этой проверки))",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - LASTTNAME (and LENGTH) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.lastname;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.an('string');",
+									"",
+									"    let minLength = 2;  //не уверена в необходимости этой проверки))",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - GROUP - TITLE (LENGHT and TYPE) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.group.title;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.a('string');",
+									"",
+									"    let minLength = 2; ",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - UVP - PLANID (TYPE) fields\", function () {",
+									"    const {customer:{uvp}} = pm.response.json();",
+									"",
+									"    if (typeof uvp.planId == 'number'){ ",
+									"        pm.expect(uvp.planId % 1).to.equal(0);",
+									"    } else {",
+									"        pm.expect(uvp.planId).to.be.null;",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - UVP - COMPANY - TITLE (TYPE) fields\", function () {",
+									"    const {customer:{uvp}} = pm.response.json();",
+									"",
+									"    pm.expect(uvp.company.title).to.be.a('string');",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authority",
+								"value": "uvp-0000-uhc-desktop.gusadev.com"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+							},
+							{
+								"key": "cache-control",
+								"value": "no-cache"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "cookie",
+								"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698248181.5.1.1698248458.0.0.0"
+							},
+							{
+								"key": "origin",
+								"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+							},
+							{
+								"key": "pragma",
+								"value": "no-cache"
+							},
+							{
+								"key": "referer",
+								"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"macOS\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "store",
+								"value": "17"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "website",
+								"value": "4"
+							},
+							{
+								"key": "x-visitor-id",
+								"value": "WYQXisYBnQ6boUzmzo1zA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"Leri\",\n    \"lastname\": \"Leria\",\n    \"email\": \"leria@mail.com\",\n    \"password\": \"{{$randomPassword}}\",\n    \"registrationMethod\": \"default\",\n    \"websiteId\": {{$randomInt}},\n    \"clientId\": \"{{$randomUUID}}\"\n}"
+						},
+						"url": {
+							"raw": "https://uvp-0000-uhc-desktop.gusadev.com/ms/customer/registration",
+							"protocol": "https",
+							"host": [
+								"uvp-0000-uhc-desktop",
+								"gusadev",
+								"com"
+							],
+							"path": [
+								"ms",
+								"customer",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Negative tests",
+			"item": [
+				{
+					"name": "Without the required parameter in the body",
+					"item": [
+						{
+							"name": "Without req. param. (email)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"websiteId\": {{$randomInt}},\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{$clientId_temporary}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Without req. param. (firstname)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{$randomEmail}}\",\n    \"websiteId\": {{$randomInt}},\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{clientId_temporary}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Without req. param. (lastname)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{$randomEmail}}\",\n    \"websiteId\": {{$randomInt}},\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Without req. param. (websiteId)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{$randomEmail}}\",\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Without req. param. (clientId)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{$randomEmail}}\",\n    \"websiteId\": {{$randomInt}},\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Without req. param. (email) Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"websiteId\": {{$randomInt}},\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{$randomUUID}}\",\n    \"email\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Using invalid data",
+					"item": [
+						{
+							"name": "Сhecking the type of fields",
+							"item": [
+								{
+									"name": "Invalid data (websiteid is string)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Responce contains ERROR field\", function () {",
+													"    let jsonData = pm.response.json();",
+													"",
+													"    pm.expect(jsonData.code).to.be.a('number');",
+													"    pm.expect(jsonData.message).to.be.an('string');",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "authority",
+												"value": "uvp-0000-uhc-desktop.gusadev.com"
+											},
+											{
+												"key": "accept",
+												"value": "application/json, text/plain, */*"
+											},
+											{
+												"key": "accept-language",
+												"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+											},
+											{
+												"key": "cache-control",
+												"value": "no-cache"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											},
+											{
+												"key": "cookie",
+												"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+											},
+											{
+												"key": "origin",
+												"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+											},
+											{
+												"key": "pragma",
+												"value": "no-cache"
+											},
+											{
+												"key": "referer",
+												"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+											},
+											{
+												"key": "sec-ch-ua",
+												"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+											},
+											{
+												"key": "sec-fetch-dest",
+												"value": "empty"
+											},
+											{
+												"key": "sec-fetch-mode",
+												"value": "cors"
+											},
+											{
+												"key": "sec-fetch-site",
+												"value": "same-origin"
+											},
+											{
+												"key": "store",
+												"value": "17"
+											},
+											{
+												"key": "user-agent",
+												"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+											},
+											{
+												"key": "website",
+												"value": "4"
+											},
+											{
+												"key": "x-visitor-id",
+												"value": "WYQXisYBnQ6boUzmzo1zA"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"websiteId\": \"{{$randomColor}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL_TEST}}ms/customer/registration",
+											"host": [
+												"{{URL_TEST}}ms"
+											],
+											"path": [
+												"customer",
+												"registration"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Invalid data (email isn't a string)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Responce contains ERROR field\", function () {",
+													"    let jsonData = pm.response.json();",
+													"",
+													"    pm.expect(jsonData.code).to.be.a('number');",
+													"    pm.expect(jsonData.message).to.be.an('string');",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "authority",
+												"value": "uvp-0000-uhc-desktop.gusadev.com"
+											},
+											{
+												"key": "accept",
+												"value": "application/json, text/plain, */*"
+											},
+											{
+												"key": "accept-language",
+												"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+											},
+											{
+												"key": "cache-control",
+												"value": "no-cache"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											},
+											{
+												"key": "cookie",
+												"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+											},
+											{
+												"key": "origin",
+												"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+											},
+											{
+												"key": "pragma",
+												"value": "no-cache"
+											},
+											{
+												"key": "referer",
+												"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+											},
+											{
+												"key": "sec-ch-ua",
+												"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+											},
+											{
+												"key": "sec-fetch-dest",
+												"value": "empty"
+											},
+											{
+												"key": "sec-fetch-mode",
+												"value": "cors"
+											},
+											{
+												"key": "sec-fetch-site",
+												"value": "same-origin"
+											},
+											{
+												"key": "store",
+												"value": "17"
+											},
+											{
+												"key": "user-agent",
+												"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+											},
+											{
+												"key": "website",
+												"value": "4"
+											},
+											{
+												"key": "x-visitor-id",
+												"value": "WYQXisYBnQ6boUzmzo1zA"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"websiteId\": \"{{$randomColor}}\",\n    \"email\": {{$randomInt}},\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL_TEST}}ms/customer/registration",
+											"host": [
+												"{{URL_TEST}}ms"
+											],
+											"path": [
+												"customer",
+												"registration"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Invalid data (firstname isn't a string)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Responce contains ERROR field\", function () {",
+													"    let jsonData = pm.response.json();",
+													"",
+													"    pm.expect(jsonData.code).to.be.a('number');",
+													"    pm.expect(jsonData.message).to.be.an('string');",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "authority",
+												"value": "uvp-0000-uhc-desktop.gusadev.com"
+											},
+											{
+												"key": "accept",
+												"value": "application/json, text/plain, */*"
+											},
+											{
+												"key": "accept-language",
+												"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+											},
+											{
+												"key": "cache-control",
+												"value": "no-cache"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											},
+											{
+												"key": "cookie",
+												"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+											},
+											{
+												"key": "origin",
+												"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+											},
+											{
+												"key": "pragma",
+												"value": "no-cache"
+											},
+											{
+												"key": "referer",
+												"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+											},
+											{
+												"key": "sec-ch-ua",
+												"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+											},
+											{
+												"key": "sec-fetch-dest",
+												"value": "empty"
+											},
+											{
+												"key": "sec-fetch-mode",
+												"value": "cors"
+											},
+											{
+												"key": "sec-fetch-site",
+												"value": "same-origin"
+											},
+											{
+												"key": "store",
+												"value": "17"
+											},
+											{
+												"key": "user-agent",
+												"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+											},
+											{
+												"key": "website",
+												"value": "4"
+											},
+											{
+												"key": "x-visitor-id",
+												"value": "WYQXisYBnQ6boUzmzo1zA"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"websiteId\": \"{{$randomColor}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"firstname\": {{$randomInt}},\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL_TEST}}ms/customer/registration",
+											"host": [
+												"{{URL_TEST}}ms"
+											],
+											"path": [
+												"customer",
+												"registration"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Invalid data (lastname isn't a string)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Responce contains ERROR field\", function () {",
+													"    let jsonData = pm.response.json();",
+													"",
+													"    pm.expect(jsonData.code).to.be.a('number');",
+													"    pm.expect(jsonData.message).to.be.an('string');",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "authority",
+												"value": "uvp-0000-uhc-desktop.gusadev.com"
+											},
+											{
+												"key": "accept",
+												"value": "application/json, text/plain, */*"
+											},
+											{
+												"key": "accept-language",
+												"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+											},
+											{
+												"key": "cache-control",
+												"value": "no-cache"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											},
+											{
+												"key": "cookie",
+												"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+											},
+											{
+												"key": "origin",
+												"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+											},
+											{
+												"key": "pragma",
+												"value": "no-cache"
+											},
+											{
+												"key": "referer",
+												"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+											},
+											{
+												"key": "sec-ch-ua",
+												"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+											},
+											{
+												"key": "sec-fetch-dest",
+												"value": "empty"
+											},
+											{
+												"key": "sec-fetch-mode",
+												"value": "cors"
+											},
+											{
+												"key": "sec-fetch-site",
+												"value": "same-origin"
+											},
+											{
+												"key": "store",
+												"value": "17"
+											},
+											{
+												"key": "user-agent",
+												"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+											},
+											{
+												"key": "website",
+												"value": "4"
+											},
+											{
+												"key": "x-visitor-id",
+												"value": "WYQXisYBnQ6boUzmzo1zA"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"websiteId\": \"{{$randomColor}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": {{$randomInt}},\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL_TEST}}ms/customer/registration",
+											"host": [
+												"{{URL_TEST}}ms"
+											],
+											"path": [
+												"customer",
+												"registration"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Invalid data (clientId isn't a string) Copy",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Responce contains ERROR field\", function () {",
+													"    let jsonData = pm.response.json();",
+													"",
+													"    pm.expect(jsonData.code).to.be.a('number');",
+													"    pm.expect(jsonData.message).to.be.an('string');",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "authority",
+												"value": "uvp-0000-uhc-desktop.gusadev.com"
+											},
+											{
+												"key": "accept",
+												"value": "application/json, text/plain, */*"
+											},
+											{
+												"key": "accept-language",
+												"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+											},
+											{
+												"key": "cache-control",
+												"value": "no-cache"
+											},
+											{
+												"key": "content-type",
+												"value": "application/json"
+											},
+											{
+												"key": "cookie",
+												"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+											},
+											{
+												"key": "origin",
+												"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+											},
+											{
+												"key": "pragma",
+												"value": "no-cache"
+											},
+											{
+												"key": "referer",
+												"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+											},
+											{
+												"key": "sec-ch-ua",
+												"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+											},
+											{
+												"key": "sec-fetch-dest",
+												"value": "empty"
+											},
+											{
+												"key": "sec-fetch-mode",
+												"value": "cors"
+											},
+											{
+												"key": "sec-fetch-site",
+												"value": "same-origin"
+											},
+											{
+												"key": "store",
+												"value": "17"
+											},
+											{
+												"key": "user-agent",
+												"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+											},
+											{
+												"key": "website",
+												"value": "4"
+											},
+											{
+												"key": "x-visitor-id",
+												"value": "WYQXisYBnQ6boUzmzo1zA"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"websiteId\": \"{{$randomColor}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": {{$randomInt}}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{URL_TEST}}ms/customer/registration",
+											"host": [
+												"{{URL_TEST}}ms"
+											],
+											"path": [
+												"customer",
+												"registration"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Invalid JSON format",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"websiteId\": {{$randomInt}},\n    \"email\": \"{{$randomEmail}}\",\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{$randomUUID}}\",\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid data (uppercase)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"websiteId\": {{$randomInt}},\n    \"email\": \"{{$randomEmail}}\",\n    \"FIRSTNAME\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid data (min-1 length of firstname)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"websiteId\": {{$randomInt}},\n    \"email\": \"{{$randomEmail}}\",\n    \"firstname\": \"a\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid data (max+1 length of firstname)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"websiteId\": {{$randomInt}},\n    \"email\": \"{{$randomEmail}}\",\n    \"firstname\": \"Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid data (max+1 length of lastname) Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"websiteId\": {{$randomInt}},\n    \"email\": \"{{$randomEmail}}\",\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid data (max-1 length of lastname)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"websiteId\": {{$randomInt}},\n    \"email\": \"{{$randomEmail}}\",\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"A\",\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid data (not unique email)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"websiteId\": {{$randomInt}},\n    \"email\": \"test@test.com\",\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{clientId_temporary}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid data (email)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"websiteId\": {{$randomInt}},\n    \"email\": \"testtest.com\",\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{clientId_temporary}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid data (max+1 email)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Responce contains ERROR field\", function () {",
+											"    let jsonData = pm.response.json();",
+											"",
+											"    pm.expect(jsonData.code).to.be.a('number');",
+											"    pm.expect(jsonData.message).to.be.an('string');",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authority",
+										"value": "uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, text/plain, */*"
+									},
+									{
+										"key": "accept-language",
+										"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+									},
+									{
+										"key": "cache-control",
+										"value": "no-cache"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "cookie",
+										"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+									},
+									{
+										"key": "origin",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+									},
+									{
+										"key": "pragma",
+										"value": "no-cache"
+									},
+									{
+										"key": "referer",
+										"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+									},
+									{
+										"key": "sec-ch-ua",
+										"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+									},
+									{
+										"key": "sec-fetch-dest",
+										"value": "empty"
+									},
+									{
+										"key": "sec-fetch-mode",
+										"value": "cors"
+									},
+									{
+										"key": "sec-fetch-site",
+										"value": "same-origin"
+									},
+									{
+										"key": "store",
+										"value": "17"
+									},
+									{
+										"key": "user-agent",
+										"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+									},
+									{
+										"key": "website",
+										"value": "4"
+									},
+									{
+										"key": "x-visitor-id",
+										"value": "WYQXisYBnQ6boUzmzo1zA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"websiteId\": {{$randomInt}},\n    \"email\": \"Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@test.com\",\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL_TEST}}ms/customer/registration",
+									"host": [
+										"{{URL_TEST}}ms"
+									],
+									"path": [
+										"customer",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "wrong HTTP method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Responce contains TOKEN fields\", function () {",
+									"    const {token} = pm.response.json();",
+									"",
+									"    pm.expect(token.token_type).to.be.a('string');",
+									"    pm.expect(token.expires_in).to.be.an('number');",
+									"    pm.expect(token.expires_in % 1).to.equal(0);",
+									"    pm.expect(token.access_token).to.be.a('string');",
+									"    pm.expect(token.refresh_token).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - EMAIL fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    pm.expect(customer.email).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - FIRSTNAME (and LENGTH) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.firstname;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.an('string');",
+									"",
+									"    let minLength = 2; //не уверена в необходимости этой проверки))",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - LASTTNAME (and LENGTH) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.lastname;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.an('string');",
+									"",
+									"    let minLength = 2;  //не уверена в необходимости этой проверки))",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - GROUP - TITLE (LENGHT and TYPE) fields\", function () {",
+									"    const {customer} = pm.response.json();",
+									"",
+									"    let fieldToCheck = customer.group.title;",
+									"",
+									"    pm.expect(fieldToCheck).to.be.a('string');",
+									"",
+									"    let minLength = 2; ",
+									"    let maxLength = 255;",
+									"",
+									"    pm.expect(fieldToCheck.length).to.be.within(minLength, maxLength);",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - UVP - PLANID (TYPE) fields\", function () {",
+									"    const {customer:{uvp}} = pm.response.json();",
+									"",
+									"    if (typeof uvp.planId == 'number'){ ",
+									"        pm.expect(uvp.planId % 1).to.equal(0);",
+									"    } else {",
+									"        pm.expect(uvp.planId).to.be.null;",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Responce contains CUSTOMER - UVP - COMPANY - TITLE (TYPE) fields\", function () {",
+									"    const {customer:{uvp}} = pm.response.json();",
+									"",
+									"    pm.expect(uvp.company.title).to.be.a('string');",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authority",
+								"value": "uvp-0000-uhc-desktop.gusadev.com"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "ru-RU,ru;q=0.9,en;q=0.8,en-US;q=0.7"
+							},
+							{
+								"key": "cache-control",
+								"value": "no-cache"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "cookie",
+								"value": "_ga=GA1.3.1894747546.1698008126; PHPSESSID=7aed9c986d08bcbf8ff5fcbc51f5bf6a; _gid=GA1.2.216014267.1698248181; _gid=GA1.3.216014267.1698248181; _ga=GA1.2.1894747546.1698008126; _gat_330793217=1; frontend=1a98635055bbf118ebed2b136dd37864; _ga_WX03P5E7CT=GS1.1.1698251030.6.1.1698251041.0.0.0"
+							},
+							{
+								"key": "origin",
+								"value": "https://uvp-0000-uhc-desktop.gusadev.com"
+							},
+							{
+								"key": "pragma",
+								"value": "no-cache"
+							},
+							{
+								"key": "referer",
+								"value": "https://uvp-0000-uhc-desktop.gusadev.com/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"118\", \"Google Chrome\";v=\"118\", \"Not=A?Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "store",
+								"value": "17"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "website",
+								"value": "4"
+							},
+							{
+								"key": "x-visitor-id",
+								"value": "WYQXisYBnQ6boUzmzo1zA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"websiteId\": {{$randomInt}},\n    \"email\": \"{{$randomEmail}}\",\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"clientId\": \"{{$randomUUID}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_TEST}}ms/customer/registration",
+							"host": [
+								"{{URL_TEST}}ms"
+							],
+							"path": [
+								"customer",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
