@@ -9,10 +9,10 @@ test.describe('UHC-0 (test ID)', () => {
         expect(pageTitle).toStrictEqual('UHC. United Healthcare.');
 
         const inputSearch = page.locator('//input[@aria-label="Search"]');
-        await inputSearch.type('ray ban');
+        await inputSearch.pressSequentially('ray ban');
 
-        // await page.locator('//ul[contains(@class, "searchResults__list")]').waitFor();
-        // expect(await page.locator('//ul[contains(@class, "searchResults__list")]').isVisible()).toBe(true);
+        await page.locator('//ul[contains(@class, "searchResults__list")]').waitFor();
+        expect(await page.locator('//ul[contains(@class, "searchResults__list")]').isVisible()).toBe(true);
 
         const inputSearchButton = page.locator('//button[@aria-label="Submit Search"]');
         await inputSearchButton.click();
