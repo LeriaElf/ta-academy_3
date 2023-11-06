@@ -1,7 +1,7 @@
 import { Component } from '@Core/component';
 
 export class MyAccMenu extends Component {
-    protected LOCATORS = {
+    private LOCATORS = {
         loginBtn: this.locator.locator('//button[contains(., "Log in")]'),
         signoutBtn: this.locator.locator('//button[contains(., "Sign out")]'),
     };

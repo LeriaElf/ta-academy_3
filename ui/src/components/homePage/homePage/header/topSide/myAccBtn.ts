@@ -2,7 +2,7 @@ import { Component } from '@Core/component';
 import { MyAccMenu } from './myAccBtn/myAccMenu';
 
 export class MyAccBtn extends Component {
-    protected LOCATORS = {
+    private LOCATORS = {
         accMenu: this.locator.locator(
             '//div[contains(@class, "topStripMenuDropdown__dropdownContent")]'
         ),

@@ -3,7 +3,7 @@ import { Container } from '@Core/container';
 export class AccessBenefits extends Container {
     private locator = this.page.locator('//div[contains(@class, "ReactModal__Content")]');
 
-    protected LOCATORS = {
+    private LOCATORS = {
         createAccBtn: this.locator.locator('//button[contains(., "Create UHCGlasses")]'),
     };
     public async isVisible(): Promise<boolean> {
