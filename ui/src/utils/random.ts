@@ -7,5 +7,5 @@ export function generateRandomMail(): string {
         domain += characters.charAt(randomIndex);
     }
 
-    return domain;
+    return domain + '@test.com';
 }
