@@ -13,21 +13,15 @@ export class GetCartItemsMock extends MockObject {
         return [
             {
                 id: 1,
-                name: 'T-Shirt',
+                name: 'Boots',
                 price: 150,
                 quantity: 2,
             },
             {
                 id: 2,
-                name: 'Dress',
-                price: 45,
-                quantity: 3,
-            },
-            {
-                id: 3,
-                name: 'Pants',
-                price: 40,
-                quantity: 1,
+                name: 'Gloves',
+                price: 20,
+                quantity: 4,
             },
         ];
     }
