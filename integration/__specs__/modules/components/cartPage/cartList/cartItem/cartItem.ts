@@ -1,5 +1,5 @@
 import { Component } from '@Core/component';
-import userEvent from "@testing-library/user-event";
+import userEvent from '@testing-library/user-event';
 
 export class CartItem extends Component {
     protected selectors = {
@@ -8,7 +8,7 @@ export class CartItem extends Component {
         priceForOne: './/div[contains(@class, "price-for-one")]',
         addButton: './/button[text()="+"]',
         deleteButton: '//button[(@data-testid="delete-btn")]',
-        quantity: './/div[(@data-testid="quantity-current")]'
+        quantity: './/div[(@data-testid="quantity-current")]',
     };
 
     public async getPriceForAll(): Promise<number> {
@@ -30,7 +30,7 @@ export class CartItem extends Component {
             cartItemName: cartItemName.at(0).textContent,
             fullPrice: parseFloat(fullPrice.at(0).textContent.replace('$', '')),
             priceForOne: parseFloat(priceForOne.at(0).textContent.replace('$', '')),
-            quantity: parseFloat(quantity.at(0).textContent)
+            quantity: parseFloat(quantity.at(0).textContent),
         };
     }
 
@@ -38,6 +38,4 @@ export class CartItem extends Component {
         const deleteButton = await this.element.waitForXpath(this.selectors.deleteButton);
         userEvent.click(deleteButton.at(0));
     }
-
-
 }

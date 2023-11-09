@@ -34,9 +34,9 @@ export class CartPage extends Container {
         return new ModalAddItem(modal);
     }
     public async isModalAddItemVisible(): Promise<boolean> {
-         return document.waitForXpath(this.selectors.modalAddItem)
-             .then((elements) => elements.length > 0).catch(() => false);
+        return document
+            .waitForXpath(this.selectors.modalAddItem)
+            .then(elements => elements.length > 0)
+            .catch(() => false);
     }
-
-
 }

@@ -1,12 +1,12 @@
 import { Component } from '@Core/component';
-import userEvent from "@testing-library/user-event";
+import userEvent from '@testing-library/user-event';
 
 export class ModalAddItem extends Component {
     protected selectors = {
         name: './/input[@data-testid="input-name"]',
         price: './/input[@data-testid="input-price"]',
         quantity: './/input[@data-testid="input-quantity"]',
-        createButton: './/button[text()="Create"]'
+        createButton: './/button[text()="Create"]',
     };
 
     public async fillNewCartItem() {
@@ -24,5 +24,4 @@ export class ModalAddItem extends Component {
         const [createButton] = await this.element.waitForXpath(this.selectors.createButton);
         userEvent.click(createButton);
     }
-
 }

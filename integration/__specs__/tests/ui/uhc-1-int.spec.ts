@@ -1,6 +1,6 @@
-import {Mock} from "@Core/mock";
-import {CartPage} from "@Components/cartPage/cartPage";
-import {GetCartItemsMock} from "@Mocks/api/mockio/v2/id/get";
+import { Mock } from '@Core/mock';
+import { CartPage } from '@Components/cartPage/cartPage';
+import { GetCartItemsMock } from '@Mocks/api/mockio/v2/id/get';
 
 describe('UHC-1-int', () => {
     const mock = Mock.getInstance();
@@ -13,7 +13,7 @@ describe('UHC-1-int', () => {
 
     afterAll(() => {
         cartPage.destroy();
-    })
+    });
 
     test('Add-Delete cart items', async () => {
         await cartPage.fulfill();
@@ -31,7 +31,7 @@ describe('UHC-1-int', () => {
         expect(await cartPage.isModalAddItemVisible()).toBe(false);
 
         const cartList = await cartPage.getCartList();
-        const cartItems = await cartList.getCartItems()
+        const cartItems = await cartList.getCartItems();
 
         const firstItemSummary = await cartItems.at(0).getSummary();
         const quantity = firstItemSummary.quantity;
@@ -44,7 +44,7 @@ describe('UHC-1-int', () => {
         if (quantity === 1) {
             expect(fullPrice).toEqual(25);
         } else {
-            expect(priceForOne).toEqual(25)
+            expect(priceForOne).toEqual(25);
         }
         reporter.endStep();
 
@@ -57,9 +57,9 @@ describe('UHC-1-int', () => {
 
         const updatedCartItems = await cartList.getCartItems();
 
-        for(const item of updatedCartItems) {
+        for (const item of updatedCartItems) {
             const itemSummary = await item.getSummary();
             expect(itemSummary.cartItemName).not.toEqual('My first item');
         }
-    })
-})
+    });
+});
